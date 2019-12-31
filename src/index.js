@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
+import * as serviceWorker from './serviceWorker';
+
 import promise from 'redux-promise';
 import multi from 'redux-multi';
 import thunk from "redux-thunk";
 
 import reducers from "./main/reducers"
 
-import * as serviceWorker from './serviceWorker';
 import AuthOrApp from './main/authOrApp'
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__

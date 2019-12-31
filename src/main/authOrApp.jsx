@@ -1,11 +1,11 @@
 import '../common/template/dependencies'
-import React from 'react';
+import React, {Component} from 'react';
 import App from './app'
 
-function AuthOrApp() {
-    return (
-        <App />
-    );
+export default class AuthOrApp extends Component {
+    render() {
+        return (
+            <App>{this.props.children}</App>
+        );
+    }
 }
-
-export default AuthOrApp;
