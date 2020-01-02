@@ -13,7 +13,7 @@ export default props => (
 
         <MenuTree label="Rede" icon="connectdevelop">
             <MenuItem path="/rede/unilevel" label="Unilevel" icon="sitemap"/>
-            <MenuItem path="/rede/direto" label="Direto" icon="users"/>
+            <MenuItem path="/rede/diretos" label="Direto" icon="users"/>
         </MenuTree>
 
         <MenuTree label="Financeiro" icon="usd">
