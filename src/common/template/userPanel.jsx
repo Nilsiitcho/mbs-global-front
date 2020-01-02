@@ -9,7 +9,7 @@ export default props => (
         </div>
         <div className="pull-left info">
             <p>Elizabeth Olsen</p>
-            <a href="#"><i className="fa fa-circle text-danger"/> Patrocinador: mbsadmin</a>
+            <a href="http://google.com"><i className="fa fa-circle text-danger"/> Patrocinador: mbsadmin</a>
         </div>
     </div>
 )
