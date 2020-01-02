@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" filepath="$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mbs-global-front.iml" filepath="$PROJECT_DIR$/.idea/mbs-global-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sankhya-chatbot-api/.idea/sankhya-chatbot-api.iml" filepath="$PROJECT_DIR$/../sankhya-chatbot-api/.idea/sankhya-chatbot-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sankhya-intent-synchronizer/.idea/sankhya-intent-synchronizer.iml" filepath="$PROJECT_DIR$/../sankhya-intent-synchronizer/.idea/sankhya-intent-synchronizer.iml" />
     </modules>
   </component>
 </project>

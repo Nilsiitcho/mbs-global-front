@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="sankhya-chatbot-api" />
+    <orderEntry type="module" module-name="sankhya-intent-synchronizer" />
+    <orderEntry type="module" module-name="fulfillment-api" />
   </component>
 </module>
