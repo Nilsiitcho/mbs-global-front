@@ -1,23 +1,23 @@
 import React from "react";
 import MenuItem from "./menuItem";
-import MenuTree from "./menuTree"
+import MenuTree from "./menuTree";
 
 export default props => (
     <ul className="sidebar-menu">
         <MenuItem path="/" label="Home" icon="home"/>
 
-        <MenuTree label="Loja" icon="shopping-cart">
-            <MenuItem path="/loja/produtos" label="Produtos" icon="usd"/>
-            <MenuItem path="/loja/meus-pedidos" label="Meus pedidos" icon="usd"/>
+        <MenuTree label="Loja" icon="cart-plus">
+            <MenuItem path="/loja/produtos" label="Produtos" icon="shopping-bag"/>
+            <MenuItem path="/loja/meus-pedidos" label="Meus pedidos" icon="shopping-cart"/>
         </MenuTree>
 
         <MenuTree label="Rede" icon="connectdevelop">
-            <MenuItem path="/rede/unilevel" label="Unilevel" icon="usd"/>
-            <MenuItem path="/rede/direto" label="Direto" icon="sitemap"/>
+            <MenuItem path="/rede/unilevel" label="Unilevel" icon="sitemap"/>
+            <MenuItem path="/rede/direto" label="Direto" icon="users"/>
         </MenuTree>
 
         <MenuTree label="Financeiro" icon="usd">
-            <MenuItem path="/rede/historico" label="Histórico" icon="usd"/>
+            <MenuItem path="/rede/historico" label="Histórico" icon="file-text-o"/>
             <MenuItem path="/rede/retiradas" label="Retiradas" icon="money"/>
         </MenuTree>
 

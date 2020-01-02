@@ -7,6 +7,7 @@ export default props => (
             <div className="inner">
                 <h3>{props.value}</h3>
                 <p>{props.text}</p>
+                <small>{props.small}</small>
             </div>
             <div className="icon">
                 <i className={`fa fa-${props.icon}`}/>

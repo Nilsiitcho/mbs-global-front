@@ -1,13 +1,23 @@
 .main-footer {
     position: fixed;
-    bottom:0px;
-    width:100%;
+    bottom: 0px;
+    width: 100%;
 }
 
-button {
+button, .margin-left {
     margin-left: 5px;
 }
 
 .table-actions {
     width: 150px;
+}
+
+.clipbord-box {
+    border: 1px solid #2AA759;
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.remove-margin {
+    margin-left: unset !important;
 }
