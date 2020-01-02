@@ -107,4 +107,4 @@ dist
 .DS_Store
 
 # Dados da IDE (WebStorm, IntelliJ, etc...)
-.idea
+.idea/
