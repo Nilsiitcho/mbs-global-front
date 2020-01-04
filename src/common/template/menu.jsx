@@ -17,8 +17,8 @@ export default props => (
         </MenuTree>
 
         <MenuTree label="Financeiro" icon="usd">
-            <MenuItem path="/rede/historico" label="Histórico" icon="file-text-o"/>
-            <MenuItem path="/rede/retiradas" label="Retiradas" icon="money"/>
+            <MenuItem path="/financeiro/historico" label="Histórico" icon="file-text-o"/>
+            <MenuItem path="/financeiro/retiradas" label="Retiradas" icon="money"/>
         </MenuTree>
 
         <MenuItem path="/suporte" label="Suporte" icon="phone"/>
