@@ -21,7 +21,7 @@ export default props => (
     <Grid cols="12 6">
         <InfoBox iconColor="green" icon="star-o" text="Link de Cadastro">
             <input className="clipbord-box" type="text" value="https://mbsglobal.com.br/bo/cadastro/index/dyego"
-                   id="cadastro-field"/>
+                   readOnly id="cadastro-field"/>
             <button className="btn btn-default" onClick={copy}>Copiar</button>
             <br/>
             <a href="https://google.com.br" target="_blank" rel="noreferrer noopener"
