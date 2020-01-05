@@ -22,11 +22,16 @@ button, .margin-left {
     margin-left: unset !important;
 }
 
-.retirada-input{
+.retirada-input {
     width: 140px;
     height: 33px;
     border: 1px solid green;
     border-radius: 4px;
     margin-top: 12px;
     padding-left: 10px;
+}
+
+.active-custom a {
+    background: #2aa559 !important;
+    border-color: #2aa559 !important;
 }

@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 
+import "../../common/template/custom.css";
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
 
-export default class Diretos extends Component {
+export default class MeusPedidos extends Component {
     constructor(props) {
         super(props);
         this.state = {list: [], paginaAtual: 1};
@@ -12,28 +13,14 @@ export default class Diretos extends Component {
     componentWillMount() {
         const example = [{
             id: 1,
-            nome: "Ronny Wisley",
-            login: "ronny.wisley",
-            data_cadastro: "22/11/2019",
-            status: "ativo"
+            data: "28/10/2019",
+            valor: "R$ 320,00",
+            status: "Cancelado"
         }, {
             id: 2,
-            nome: "Martília Mendonça",
-            login: "marilinha",
-            data_cadastro: "02/01/2020",
-            status: "inativo"
-        }, {
-            id: 3,
-            nome: "Xereleu",
-            login: "xexeu",
-            data_cadastro: "02/01/2000",
-            status: "ativo"
-        }, {
-            id: 4,
-            nome: "Bisinota",
-            login: "bisusinha",
-            data_cadastro: "12/08/2017",
-            status: "inativo"
+            data: "05/01/2020",
+            valor: "R$ 1800,00",
+            status: "Finalizado"
         }];
 
         const total = example.length;
@@ -45,15 +32,22 @@ export default class Diretos extends Component {
         this.setState({list: example, total, totalDePaginas, paginaAtual, paginaAnterior, proximaPagina})
     }
 
+    visualizarPedido(pedido) {
+        alert(`${pedido.id} - ${pedido.valor}`)
+    }
+
     renderRows() {
         const list = this.state.list || [];
-        return list.map(user => (
-            <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.nome}</td>
-                <td>{user.login}</td>
-                <td>{user.data_cadastro}</td>
-                <td>{user.status}</td>
+        return list.map(pedido => (
+            <tr key={pedido.id}>
+                <td>{pedido.id}</td>
+                <td>{pedido.data}</td>
+                <td>{pedido.valor}</td>
+                <td>{pedido.status}</td>
+                <td>
+                    <button className="btn btn-success" onClick={() => this.visualizarPedido(pedido)}>Visualizar
+                    </button>
+                </td>
             </tr>
         ))
     }
@@ -74,7 +68,6 @@ export default class Diretos extends Component {
     getPageData(page) {
         const proximaPagina = "";
         const paginaAnterior = "";
-        console.log(`Pegando dados da página ${page}`);
         this.setState({...this.state, paginaAtual: page, proximaPagina, paginaAnterior});
     }
 
@@ -87,10 +80,10 @@ export default class Diretos extends Component {
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NOME</th>
-                            <th>LOGIN</th>
-                            <th>DATA CADASTRO</th>
+                            <th>DATA</th>
+                            <th>VALOR</th>
                             <th>STATUS</th>
+                            <th>AÇÃO</th>
                         </tr>
                         </thead>
                         <tbody>
