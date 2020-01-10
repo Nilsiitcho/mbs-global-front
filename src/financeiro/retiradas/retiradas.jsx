@@ -1,12 +1,12 @@
 import React, {Component} from "react"
-import ContentHeader from "../common/template/contentHeader";
-import Content from "../common/template/content";
-import Grid from "../common/layout/grid";
-import Row from "../common/layout/row";
-import InfoBox from "../common/template/infoBox";
-import "../common/template/custom.css"
+import ContentHeader from "../../common/template/contentHeader";
+import Content from "../../common/template/content";
+import Grid from "../../common/layout/grid";
+import Row from "../../common/layout/row";
+import InfoBox from "../../common/template/infoBox";
+import "../../common/template/custom.css"
 import Button from "react-redux-toastr/lib/Button";
-import ValueBox from "../common/widget/valueBox";
+import ValueBox from "../../common/widget/valueBox";
 
 class Retiradas extends Component {
 
@@ -16,7 +16,6 @@ class Retiradas extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <ContentHeader title="Solicitar Saque"/>
@@ -37,7 +36,6 @@ class Retiradas extends Component {
             </div>
         )
     }
-
 }
 
 export default Retiradas;
