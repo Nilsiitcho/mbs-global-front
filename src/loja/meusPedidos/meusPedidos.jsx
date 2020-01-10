@@ -42,13 +42,38 @@ export default class MeusPedidos extends Component {
         alert(`${pedido.id} - ${pedido.valor}`)
     }
 
+    renderPages() {
+        const pages = [];
+
+        for (let i = 1; i <= this.state.totalDePaginas; i++) {
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
+            const page = <li className={`page-item ${this.state.paginaAtual === i ? "active active-custom" : ""}`}><a
+                className="page-link" onClick={() => this.getPageData(i)}>{i}</a></li>;
+            pages.push(page);
+        }
+
+        return pages;
+    }
+
+    getPageData(page) {
+        const proximaPagina = "";
+        const paginaAnterior = "";
+        this.setState({...this.state, paginaAtual: page, proximaPagina, paginaAnterior});
+    }
+
     render() {
-        const cols = ["ID", "DATA", "VALOR", "STATUS", "AÇÃO"];
         return (
             <div>
                 <ContentHeader title="Rede Diretos"/>
                 <Content>
-                    <List cols={cols} items={this.state.list}/>
+                    <List cols={["ID", "DATA", "VALOR", "STATUS", "AÇÃO"]} items={this.state.list}/>
+                    <ul className="pagination ">
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <li className="page-item"><a className="page-link">Anterior</a></li>
+                        {this.renderPages()}
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <li className="page-item"><a className="page-link">Próximo</a></li>
+                    </ul>
                 </Content>
             </div>
         )

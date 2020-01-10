@@ -8,12 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="sankhya-chatbot-api" />
-    <orderEntry type="module" module-name="sankhya-intent-synchronizer" />
     <orderEntry type="module" module-name="fulfillment-api" />
-    <orderEntry type="module" module-name="dynamo-sample" />
-    <orderEntry type="module" module-name="sankhya-chatbot-kinesis-pub" />
-    <orderEntry type="module" module-name="hello-world-angular" />
-    <orderEntry type="module" module-name="place" />
+    <orderEntry type="module" module-name="chat-wrapper" />
   </component>
 </module>

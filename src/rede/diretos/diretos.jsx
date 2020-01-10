@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
+import List from "../../common/template/lista";
 
 export default class Diretos extends Component {
     constructor(props) {
@@ -22,18 +23,6 @@ export default class Diretos extends Component {
             login: "marilinha",
             data_cadastro: "02/01/2020",
             status: "inativo"
-        }, {
-            id: 3,
-            nome: "Xereleu",
-            login: "xexeu",
-            data_cadastro: "02/01/2000",
-            status: "ativo"
-        }, {
-            id: 4,
-            nome: "Bisinota",
-            login: "bisusinha",
-            data_cadastro: "12/08/2017",
-            status: "inativo"
         }];
 
         const total = example.length;
@@ -45,29 +34,14 @@ export default class Diretos extends Component {
         this.setState({list: example, total, totalDePaginas, paginaAtual, paginaAnterior, proximaPagina})
     }
 
-    renderRows() {
-        const list = this.state.list || [];
-        return list.map(user => (
-            <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.nome}</td>
-                <td>{user.login}</td>
-                <td>{user.data_cadastro}</td>
-                <td>{user.status}</td>
-            </tr>
-        ))
-    }
-
     renderPages() {
         const pages = [];
-
         for (let i = 1; i <= this.state.totalDePaginas; i++) {
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
             const page = <li className={`page-item ${this.state.paginaAtual === i ? "active active-custom" : ""}`}><a
                 className="page-link" onClick={() => this.getPageData(i)}>{i}</a></li>;
             pages.push(page);
         }
-
         return pages;
     }
 
@@ -83,20 +57,7 @@ export default class Diretos extends Component {
             <div>
                 <ContentHeader title="Rede Diretos"/>
                 <Content>
-                    <table className="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOME</th>
-                            <th>LOGIN</th>
-                            <th>DATA CADASTRO</th>
-                            <th>STATUS</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.renderRows()}
-                        </tbody>
-                    </table>
+                    <List cols={["ID", "NOME", "LOGIN", "DATA CADASTRO", "STATUS"]} items={this.state.list}/>
                     <ul className="pagination ">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <li className="page-item"><a className="page-link">Anterior</a></li>

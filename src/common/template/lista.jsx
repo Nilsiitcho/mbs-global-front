@@ -21,7 +21,7 @@ function renderColums(cols) {
     })
 }
 
-function renderRows(items) {
+function renderRows(items = []) {
     return items.map(item => (
         <tr key={item.id}>
             {renderItemData(item)}
