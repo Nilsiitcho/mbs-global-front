@@ -31,6 +31,13 @@ button, .margin-left {
     padding-left: 10px;
 }
 
+.historico-input {
+    height: 33px;
+    border: 1px solid green;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
 .active-custom a {
     background: #2aa559 !important;
     border-color: #2aa559 !important;
