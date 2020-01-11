@@ -4,6 +4,7 @@ import "../../common/template/custom.css";
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
 import List from "../../common/template/lista";
+import Pages from "../../common/template/paginacao";
 
 export default class MeusPedidos extends Component {
     constructor(props) {
@@ -17,11 +18,6 @@ export default class MeusPedidos extends Component {
             data: "28/10/2019",
             valor: "R$ 320,00",
             status: "Cancelado"
-        }, {
-            id: 2,
-            data: "05/01/2020",
-            valor: "R$ 1800,00",
-            status: "Finalizado"
         }];
 
         const total = pedidos.length;
@@ -42,38 +38,20 @@ export default class MeusPedidos extends Component {
         alert(`${pedido.id} - ${pedido.valor}`)
     }
 
-    renderPages() {
-        const pages = [];
-
-        for (let i = 1; i <= this.state.totalDePaginas; i++) {
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            const page = <li className={`page-item ${this.state.paginaAtual === i ? "active active-custom" : ""}`}><a
-                className="page-link" onClick={() => this.getPageData(i)}>{i}</a></li>;
-            pages.push(page);
-        }
-
-        return pages;
-    }
-
-    getPageData(page) {
-        const proximaPagina = "";
-        const paginaAnterior = "";
-        this.setState({...this.state, paginaAtual: page, proximaPagina, paginaAnterior});
+    getPage(page) {
+        this.setState({...this.state, paginaAtual: page});
     }
 
     render() {
         return (
             <div>
-                <ContentHeader title="Rede Diretos"/>
+                <ContentHeader title="Meus Pedidos"/>
                 <Content>
                     <List cols={["ID", "DATA", "VALOR", "STATUS", "AÇÃO"]} items={this.state.list}/>
-                    <ul className="pagination ">
-                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <li className="page-item"><a className="page-link">Anterior</a></li>
-                        {this.renderPages()}
-                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <li className="page-item"><a className="page-link">Próximo</a></li>
-                    </ul>
+                    <Pages totalDePaginas={this.state.totalDePaginas} paginaAtual={this.state.paginaAtual}
+                           callBack={function (data) {
+                               this.getPage(data)
+                           }.bind(this)}/>
                 </Content>
             </div>
         )

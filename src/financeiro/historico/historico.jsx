@@ -29,19 +29,21 @@ export default class HistoricoRetiradas extends Component {
         this.setState({list: example, total, totalDePaginas, paginaAtual, paginaAnterior, proximaPagina})
     }
 
-    getNextPage(page) {
-        alert("Pegando os dados da página " + page);
+    getPage(page) {
         this.setState({...this.state, paginaAtual: page});
     }
 
     render() {
         return (
             <div>
-                <ContentHeader title="Rede Diretos"/>
+                <ContentHeader title="Histórico de Pagamentos"/>
                 <Content>
-                    <List cols={["ID", "NOME", "LOGIN", "DATA CADASTRO", "STATUS"]} items={this.state.list}/>
+                    <List cols={["ID", "DATA", "PAGAMENTO EM", "usuário", "REFERENTE", "VALOR"]}
+                          items={this.state.list}/>
                     <Pages totalDePaginas={this.state.totalDePaginas} paginaAtual={this.state.paginaAtual}
-                           callBack={function(data) {this.getNextPage(data)}.bind(this)}/>
+                           callBack={function (data) {
+                               this.getPage(data)
+                           }.bind(this)}/>
                 </Content>
             </div>
         )
