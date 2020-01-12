@@ -1,25 +1,33 @@
 import React from "react";
 
-function renderPages(totalDePaginas, paginaAtual, callBack){
-        const pages = [];
+function renderPages(totalDePaginas, paginaAtual, callBack) {
+    const pages = [];
 
-        for (let i = 1; i <= totalDePaginas; i++) {
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            const page = <li className={`page-item ${paginaAtual === i ? "active active-custom" : ""}`}><a
-                className="page-link" onClick={() => callBack(i)}>{i}</a></li>;
-            pages.push(page);
-        }
-        return pages;
+    for (let i = 1; i <= totalDePaginas; i++) {
+        const page = <li key={i} className="page-item">
+            <button
+                className={`page-button ${paginaAtual === i ? "page-button-active" : ""}`}
+                onClick={() => callBack(i)}>{i}</button>
+        </li>;
+        pages.push(page);
+    }
+    return pages;
 }
 
 export default props => {
     return (
         <ul className="pagination ">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <li className="page-item"><a className="page-link">Anterior</a></li>
+            <li key={"anterior"} className="page-item" onClick={() => props.callBack(props.lastPage)}>
+                <button
+                    className="page-button">Anterior
+                </button>
+            </li>
             {renderPages(props.totalDePaginas, props.paginaAtual, props.callBack)}
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <li className="page-item"><a className="page-link">Próximo</a></li>
+            <li key={"proxima"} className="page-item" onClick={() => props.callBack(props.nextPage)}>
+                <button
+                    className="page-button">Próximo
+                </button>
+            </li>
         </ul>
     )
 }

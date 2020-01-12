@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../chat-wrapper/.idea/chat-wrapper.iml" filepath="$PROJECT_DIR$/../chat-wrapper/.idea/chat-wrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" filepath="$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" />
+      <module fileurl="file://$USER_HOME$/Estudos/mbs/list-endpoint/.idea/list-endpoint.iml" filepath="$USER_HOME$/Estudos/mbs/list-endpoint/.idea/list-endpoint.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mbs-global-front.iml" filepath="$PROJECT_DIR$/.idea/mbs-global-front.iml" />
     </modules>
   </component>

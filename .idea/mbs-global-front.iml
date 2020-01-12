@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="fulfillment-api" />
     <orderEntry type="module" module-name="chat-wrapper" />
+    <orderEntry type="module" module-name="list-endpoint" />
   </component>
 </module>

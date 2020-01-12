@@ -7,7 +7,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "admin-lte": "2.3.11",
-    "axios": "0.18.0",
+    "axios": "^0.18.0",
     "font-awesome": "4.7.0",
     "ionicons": "4.4.3",
     "jquery": "2.2.3",

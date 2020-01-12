@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
@@ -11,26 +12,18 @@ export default class Diretos extends Component {
         this.state = {list: [], paginaAtual: 1};
     }
 
-    componentWillMount() {
-        const example = [{
-            id: 1,
-            nome: "Ronny Wisley",
-            login: "ronny.wisley",
-            data_cadastro: "22/11/2019",
-            status: "ativo"
-        }];
-
-        const total = example.length;
-        const totalDePaginas = 2;
-        const paginaAnterior = null;
-        const proximaPagina = "";
-        const paginaAtual = 1;
-
-        this.setState({list: example, total, totalDePaginas, paginaAtual, paginaAnterior, proximaPagina})
+    async componentWillMount() {
+        await this.getData("http://localhost:8080/api/diretos");
     }
 
-    getPage(page) {
-        this.setState({...this.state, paginaAtual: page});
+    async getData(url) {
+        const payload = await axios.get(url);
+        const {data, pages, lastPage, nextPage, total, actualPage} = payload.data;
+        this.setState({list: data, total, pages, lastPage, nextPage, actualPage});
+    }
+
+    async getPage(page) {
+        await this.getData(`http://localhost:8080/api/diretos?page=${page}`);
     }
 
     render() {
@@ -39,8 +32,9 @@ export default class Diretos extends Component {
                 <ContentHeader title="Rede Diretos"/>
                 <Content>
                     <List cols={["ID", "NOME", "LOGIN", "DATA CADASTRO", "STATUS"]} items={this.state.list}/>
-                    <Pages totalDePaginas={this.state.totalDePaginas} paginaAtual={this.state.paginaAtual}
-                           callBack={function (data) {
+                    <Pages totalDePaginas={this.state.pages} paginaAtual={this.state.actualPage}
+                           nextPage={this.state.nextPage} lastPage={this.state.lastPage}
+                           callBack={async function (data) {
                                this.getPage(data)
                            }.bind(this)}/>
                 </Content>

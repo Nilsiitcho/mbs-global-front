@@ -1,10 +1,10 @@
 .main-footer {
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
 }
 
-button, .margin-left {
+.margin-left {
     margin-left: 5px;
 }
 
@@ -20,6 +20,12 @@ button, .margin-left {
 
 .remove-margin {
     margin-left: unset !important;
+}
+
+.page-button {
+    height: 30px;
+    background: white;
+    border: 1px solid #2AA759;
 }
 
 .retirada-input {
@@ -38,7 +44,8 @@ button, .margin-left {
     margin-left: 5px;
 }
 
-.active-custom a {
+.page-button-active {
     background: #2aa559 !important;
     border-color: #2aa559 !important;
+    color: white;
 }

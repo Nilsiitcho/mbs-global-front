@@ -5,7 +5,6 @@ import Grid from "../../common/layout/grid";
 import Row from "../../common/layout/row";
 import InfoBox from "../../common/template/infoBox";
 import "../../common/template/custom.css"
-import Button from "react-redux-toastr/lib/Button";
 import ValueBox from "../../common/widget/valueBox";
 
 class Retiradas extends Component {
@@ -24,7 +23,7 @@ class Retiradas extends Component {
                         <Grid cols="12 4">
                             <InfoBox iconColor="green" icon="money" text="valor">
                                 <input className="retirada-input" type="number" min="1" step="any" placeholder="00,00"/>
-                                <Button className="btn btn-success">Solicitar</Button>
+                                <button className="btn btn-success margin-left">Solicitar</button>
                             </InfoBox>
                         </Grid>
                         <ValueBox cols="12 4" color="green" icon="usd"

@@ -17,7 +17,7 @@ export default props => (
 
 function renderColums(cols) {
     return cols.map(col => {
-        return (<th>{col}</th>)
+        return (<th key={col}>{col}</th>)
     })
 }
 
@@ -33,7 +33,7 @@ function renderItemData(item) {
     const tds = [];
     for (let data in item) {
         if (item.hasOwnProperty(data)) {
-            tds.push(<td>{item[data]}</td>)
+            tds.push(<td key={tds.length}>{item[data]}</td>)
         }
     }
     return tds
