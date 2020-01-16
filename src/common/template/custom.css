@@ -49,3 +49,27 @@
     border-color: #2aa559 !important;
     color: white;
 }
+
+/*#############################*/
+/*produto*/
+
+.produto-image {
+    object-fit: cover;
+    width: 225px;
+    height: 225px;
+}
+
+.produto-container {
+    background: #eff2f6;
+    border-radius: 4px;
+    width: 250px;
+    text-align: center;
+    margin: 5px;
+    box-sizing: content-box;
+    padding-bottom: 10px;
+}
+
+.produto-decsricao {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
