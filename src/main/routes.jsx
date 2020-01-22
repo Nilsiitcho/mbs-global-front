@@ -8,11 +8,13 @@ import Retiradas from "../financeiro/retiradas/retiradas"
 import Historico from "../financeiro/historico/historico";
 import MeusPedidos from "../loja/meusPedidos/meusPedidos";
 import Produtos from "../loja/produtos/produtos"
+import CadastroProdutos from "../cadastro/cadastroProduto/cadastroProduto";
 
 export default props => (
     <div className="content-wrapper">
         <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/cadastro/produtos" component={CadastroProdutos}/>
             <Route path="/loja/meusPedidos" component={MeusPedidos}/>
             <Route path="/loja/produtos" component={Produtos}/>
             <Route path="/rede/diretos" component={Diretos}/>
