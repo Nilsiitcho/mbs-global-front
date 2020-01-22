@@ -6,6 +6,6 @@ export default props => (
         <input name={props.name} placeholder={props.placeholder}
                type={props.type} readOnly={props.readOnly}
                value={props.value} onChange={props.onChange}
-               className="form-control"/>
+               className={`form-control ${props.hasError ? 'has-error' : ''}`}/>
     </div>
 )

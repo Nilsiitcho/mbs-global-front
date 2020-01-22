@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
 import ProdutoImagem from "./produtoimagem";
+import Row from "../../common/layout/row";
 import axios from "axios";
 
 const Produtos = props => {
@@ -9,7 +10,7 @@ const Produtos = props => {
     const [produtos, setProdutos] = useState([]);
 
     async function getData() {
-        const {data} = await axios.get('http://localhost:3001/produto/index');
+        const {data} = await axios.get('http://localhost:3001/produto/index?limit=5');
         setProdutos(data.docs)
     }
 
@@ -27,12 +28,14 @@ const Produtos = props => {
     }
 
     return (
-        <div>
+        <Fragment>
             <ContentHeader title="Produtos"/>
             <Content>
-                {renderProduto()}
+                <Row>
+                    {renderProduto()}
+                </Row>
             </Content>
-        </div>
+        </Fragment>
     )
 };
 
