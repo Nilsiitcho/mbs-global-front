@@ -5,7 +5,7 @@ import Grid from "../../common/layout/grid";
 export default props => (
     <Grid cols='12 3'>
         <div className="produto-container">
-            <h3>{props.title}</h3>
+            <h4 className="produto-header">{props.title}</h4>
             <img src={props.src} className="produto-image" alt="imagem do produto"/>
             <div className="produto-decsricao">
                 <strong>{`Valor: ${props.valor}`}</strong>

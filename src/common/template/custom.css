@@ -50,8 +50,10 @@
     color: white;
 }
 
-/*#############################*/
-/*produto*/
+.produto-header {
+    padding-top: 10px;
+    height: 60px;
+}
 
 .produto-image {
     object-fit: cover;
@@ -60,16 +62,23 @@
 }
 
 .produto-container {
-    background: #eff2f6;
+    background: #e4e4e4;
     border-radius: 4px;
     width: 250px;
+    height: 400px;
     text-align: center;
     margin: 5px;
     box-sizing: content-box;
     padding-bottom: 10px;
+    margin-bottom: 40px;
+}
+
+.produto-container h4 {
+    padding-top: 10px;
 }
 
 .produto-decsricao {
     margin-top: 10px;
     margin-bottom: 10px;
+    height: 50px;
 }
