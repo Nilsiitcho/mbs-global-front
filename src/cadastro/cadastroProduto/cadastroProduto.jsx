@@ -25,7 +25,7 @@ export default () => {
     const [categoriaHasError, setCategoriaHasError] = useState(false);
     const [tipoHasError, setTipoHasError] = useState(false);
     const [botaoLabel, setBotaoLabel] = useState("Cadastrar");
-    const [totalPaginas, setTotalPaginas] = useState(0);
+    const [totalPaginas, setTotalPaginas] = useState(1);
     const [paginaAtual, setPaginaAtual] = useState(1);
 
     function handleChange(e) {

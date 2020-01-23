@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../api-MBS/.idea/api-MBS.iml" filepath="$PROJECT_DIR$/../api-MBS/.idea/api-MBS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../estudos/billing-cycles-frontend/.idea/billing-cycles-frontend.iml" filepath="$PROJECT_DIR$/../../estudos/billing-cycles-frontend/.idea/billing-cycles-frontend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../sankhya/chat-wrapper-component/.idea/chat-wrapper.iml" filepath="$PROJECT_DIR$/../../sankhya/chat-wrapper-component/.idea/chat-wrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" filepath="$PROJECT_DIR$/../fulfillment-api/.idea/fulfillment-api.iml" />
       <module fileurl="file://$USER_HOME$/Estudos/mbs/list-endpoint/.idea/list-endpoint.iml" filepath="$USER_HOME$/Estudos/mbs/list-endpoint/.idea/list-endpoint.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mbs-global-front.iml" filepath="$PROJECT_DIR$/.idea/mbs-global-front.iml" />

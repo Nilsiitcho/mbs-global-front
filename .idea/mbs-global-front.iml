@@ -11,7 +11,6 @@
     <orderEntry type="module" module-name="fulfillment-api" />
     <orderEntry type="module" module-name="list-endpoint" />
     <orderEntry type="module" module-name="api-MBS" />
-    <orderEntry type="module" module-name="chat-wrapper" />
-    <orderEntry type="module" module-name="billing-cycles-frontend" />
+    <orderEntry type="module" module-name="api-MBS" />
   </component>
 </module>
