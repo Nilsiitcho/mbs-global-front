@@ -7,7 +7,8 @@ export default props => (
         <MenuItem path="/" label="Home" icon="home"/>
 
         <MenuTree label="Cadastro" icon="edit">
-            <MenuItem path="/cadastro/produtos" label="Produtos" icon="shopping-bag"/>
+            <MenuItem path="/cadastro/usuario" label="Usuário" icon="user"/>
+            <MenuItem path="/cadastro/produto" label="Produto" icon="shopping-bag"/>
         </MenuTree>
 
         <MenuTree label="Loja" icon="cart-plus">

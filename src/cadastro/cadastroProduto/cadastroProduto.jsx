@@ -44,11 +44,11 @@ export default () => {
     const [pesoHasError, setPesoHasError] = useState(false);
     const [thumbHasError, setThumbHasError] = useState(false);
 
-    const [readOnly, setReadOnly] = useState(false);
-    const [botaoLabel, setBotaoLabel] = useState("Cadastrar");
     const [totalPaginas, setTotalPaginas] = useState(1);
     const [paginaAtual, setPaginaAtual] = useState(1);
 
+    const [botaoLabel, setBotaoLabel] = useState("Cadastrar");
+    const [readOnly, setReadOnly] = useState(false);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -334,7 +334,7 @@ export default () => {
 
     return (
         <Fragment>
-            <ContentHeader title="Cadastro de Produtos"/>
+            <ContentHeader title="Cadastro de Produto"/>
             <Content>
                 <Row>
                     <Grid cols="12 3">
