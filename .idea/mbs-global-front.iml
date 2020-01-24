@@ -11,6 +11,5 @@
     <orderEntry type="module" module-name="fulfillment-api" />
     <orderEntry type="module" module-name="list-endpoint" />
     <orderEntry type="module" module-name="api-MBS" />
-    <orderEntry type="module" module-name="api-MBS" />
   </component>
 </module>

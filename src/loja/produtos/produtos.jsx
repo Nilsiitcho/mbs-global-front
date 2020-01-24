@@ -14,7 +14,7 @@ export default () => {
     const [paginaAtual, setPaginaAtual] = useState(1);
 
     async function getData(page = 1) {
-        const {data} = await axios.get(`http://localhost:3001/produto/index?limit=5&skip=${page}`);
+        const {data} = await axios.get(`http://localhost:3001/produto?limit=5&skip=${page}`);
         const pages = data.pages;
         setTotalPaginas(pages);
         setPaginaAtual(page);

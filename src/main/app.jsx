@@ -3,8 +3,9 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import Header from "../common/template/header"
 import Sidebar from "../common/template/sideBar"
-// import Footer from "../common/template/footer"
 import Routes from "./routes"
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 export default props => (
@@ -13,7 +14,7 @@ export default props => (
             <Header/>
             <Sidebar/>
             <Routes/>
-            {/*<Footer/>*/}
+            <ToastContainer/>
         </Fragment>
     </Router>
 )
