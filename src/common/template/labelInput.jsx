@@ -6,6 +6,7 @@ export default props => (
         <input name={props.name} placeholder={props.placeholder}
                type={props.type} readOnly={props.readOnly}
                value={props.value} onChange={props.onChange}
-               className={`form-control ${props.hasError ? 'has-error' : ''}`}/>
+               className={`form-control ${props.hasError ? 'has-error' : ''}`}
+               step={props.step} min={props.min} maxLength={props.maxlength}/>
     </div>
 )
