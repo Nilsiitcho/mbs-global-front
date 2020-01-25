@@ -1,15 +1,14 @@
 import React, {Fragment, useEffect, useState} from "react";
 import Content from "../../common/template/content";
 import ContentHeader from "../../common/template/contentHeader";
-import LabelInput from "../../common/template/labelInput";
 import Grid from "../../common/layout/grid";
 import Row from "../../common/layout/row";
 import Lista from "../../common/template/lista";
+import LabelInput from "../../common/template/labelInput";
 import Pages from "../../common/template/paginacao";
 import Loading from "../../common/template/loading";
 
 import fieldsValidator from "../../utils/fieldValidator";
-
 import {toast} from "react-toastify";
 import axios from "axios";
 
@@ -107,6 +106,109 @@ export default () => {
         setters[e.target.name]();
     }
 
+    async function fillForm(id) {
+        const {data} = await axios.get(`${BASE_URL}/${id}`);
+        const produto = data[0];
+
+        setId(produto.id);
+        setTitulo(produto.titulo);
+        setEstoque(produto.estoque);
+        setDescricao(produto.descricao);
+        setPreco(produto.preco);
+        setPrecoAtv(produto.preco_atv);
+        setBonus(produto.bonus);
+        setBonusAtv(produto.bonus_atv);
+        setCategoria(produto.categoria);
+        setTipo(produto.tipo);
+        setPeso(produto.peso);
+        setStatus(produto.status);
+        setThumb(produto.thumb);
+    }
+
+    function clearForm() {
+        setId("");
+        setTitulo("");
+        setTituloHasError(false);
+
+        setEstoque("");
+        setEstoqueHasError(false);
+
+        setDescricao("");
+        setDescricaoHasError(false);
+
+        setPreco("");
+        setPrecoHasError(false);
+
+        setPrecoAtv("");
+        setPrecoAtvHasError(false);
+
+        setBonus("");
+        setBonusHasError(false);
+
+        setBonusAtv("");
+        setBonusAtvHasError(false);
+
+        setCategoria("");
+        setCategoriaHasError(false);
+
+        setTipo("");
+        setTipoHasError(false);
+
+        setPeso("");
+        setPesoHasError(false);
+
+        setThumb("");
+        setThumbHasError(false);
+
+        setStatus("RASCUNHO");
+        setBotaoLabel("Cadastrar");
+        setReadOnly(false);
+    }
+
+    function createBody() {
+        const produtoId = id === "" ? null : id;
+        return {
+            "id": produtoId,
+            "titulo": titulo,
+            "estoque": estoque,
+            "descricao": descricao,
+            "preco": preco,
+            "preco_atv": precoAtv,
+            "bonus": bonus,
+            "bonus_atv": bonusAtv,
+            "categoria": categoria,
+            "tipo": tipo,
+            "status": status,
+            "thumb": thumb,
+            "peso": peso
+        }
+    }
+
+    function validateFields() {
+        function createValidator(field, type, callBack) {
+            return {
+                field: field,
+                type: type,
+                callBack: callBack
+            }
+        }
+
+        const fields = [];
+        fields.push(createValidator(titulo, "text", () => setTituloHasError(true)));
+        fields.push(createValidator(descricao, "text", () => setDescricaoHasError(true)));
+        fields.push(createValidator(categoria, "text", () => setCategoriaHasError(true)));
+        fields.push(createValidator(tipo, "text", () => setTipoHasError(true)));
+        fields.push(createValidator(thumb, "text", () => setThumbHasError(true)));
+        fields.push(createValidator(preco, "number", () => setPrecoHasError(true)));
+        fields.push(createValidator(precoAtv, "number", () => setPrecoAtvHasError(true)));
+        fields.push(createValidator(bonus, "number", () => setBonusHasError(true)));
+        fields.push(createValidator(bonusAtv, "number", () => setBonusAtvHasError(true)));
+        fields.push(createValidator(peso, "number", () => setPesoHasError(true)));
+        fields.push(createValidator(estoque, "number", () => setEstoqueHasError(true)));
+
+        return fieldsValidator.validate(fields);
+    }
+
     async function getData(page = 1) {
         setLoading(true);
         const {data} = await axios.get(`${BASE_URL}?limit=10&skip=${page}`);
@@ -145,163 +247,56 @@ export default () => {
         setReadOnly(true);
     }
 
-    async function fillForm(id) {
-        const {data} = await axios.get(`${BASE_URL}/${id}`);
-        const produto = data[0];
-
-        setId(produto.id);
-        setTitulo(produto.titulo);
-        setEstoque(produto.estoque);
-        setDescricao(produto.descricao);
-        setPreco(produto.preco);
-        setPrecoAtv(produto.preco_atv);
-        setBonus(produto.bonus);
-        setBonusAtv(produto.bonus_atv);
-        setCategoria(produto.categoria);
-        setTipo(produto.tipo);
-        setPeso(produto.peso);
-        setStatus(produto.status);
-        setThumb(produto.thumb);
-    }
-
-    function createValidator(field, type, callBack) {
-        return {
-            field: field,
-            type: type,
-            callBack: callBack
-        }
-    }
-
-    function validateFields() {
-        const fields = [];
-        fields.push(createValidator(titulo, "text", () => setTituloHasError(true)));
-        fields.push(createValidator(descricao, "text", () => setDescricaoHasError(true)));
-        fields.push(createValidator(categoria, "text", () => setCategoriaHasError(true)));
-        fields.push(createValidator(tipo, "text", () => setTipoHasError(true)));
-        fields.push(createValidator(thumb, "text", () => setThumbHasError(true)));
-        fields.push(createValidator(preco, "number", () => setPrecoHasError(true)));
-        fields.push(createValidator(precoAtv, "number", () => setPrecoAtvHasError(true)));
-        fields.push(createValidator(bonus, "number", () => setBonusHasError(true)));
-        fields.push(createValidator(bonusAtv, "number", () => setBonusAtvHasError(true)));
-        fields.push(createValidator(peso, "number", () => setPesoHasError(true)));
-        fields.push(createValidator(estoque, "number", () => setEstoqueHasError(true)));
-
-        return fieldsValidator.validate(fields);
-    }
-
     function handleSubmit() {
         switch (botaoLabel) {
             case "Cadastrar":
-                cadastrar();
+                doRequest("post");
                 return;
             case "Apagar":
-                apagar();
+                doRequest("delete");
                 return;
             default:
-                atualizar();
+                doRequest("put");
                 return;
         }
-    }
 
-    async function apagar() {
-        await doRequest("delete");
-    }
+        function doRequest(method) {
+            function doDelete() {
+                axios.delete(`${BASE_URL}/${id}`)
+                    .then(async () => {
+                        toast.success("Produto excluído com sucesso");
+                        await getData();
+                        clearForm();
+                    }).catch(err => {
+                    toast.error("Falha ao excluir produto!");
+                });
+            }
 
-    async function atualizar() {
-        await doRequest("put");
-    }
+            function doPostPut() {
+                const pagamentoId = id != null ? id : '';
+                const body = createBody();
+                axios[method](`${BASE_URL}/${pagamentoId}`, body)
+                    .then(async () => {
+                        toast.success("Produto salvo com sucesso");
+                        await getData();
+                        clearForm();
+                    }).catch(err => {
+                    toast.error("Falha ao salvar produto!");
+                });
+            }
 
-    async function cadastrar() {
-        await doRequest("post");
-    }
-
-    async function doRequest(method) {
-        function doDelete() {
-            axios.delete(`${BASE_URL}/${id}`)
-                .then(async () => {
-                    toast.success("Produto excluído com sucesso");
-                    await getData();
-                    clearForm();
-                }).catch(err => {
-                toast.error("Falha ao excluir produto!");
-            });
-        }
-
-        function doPostPut() {
-            const pagamentoId = id != null ? id : '';
-            const body = createBody();
-            axios[method](`${BASE_URL}/${pagamentoId}`, body)
-                .then(async () => {
-                    toast.success("Produto salvo com sucesso");
-                    await getData();
-                    clearForm();
-                }).catch(err => {
-                toast.error("Falha ao salvar produto!");
-            });
-        }
-
-        if (method === "delete") {
-            doDelete();
-        } else {
-            if (validateFields()) {
-                doPostPut();
+            if (method === "delete") {
+                doDelete();
             } else {
-                toast.error("Alguns campos não foram preenchidos corretamente!");
+                if (validateFields()) {
+                    doPostPut();
+                } else {
+                    toast.error("Alguns campos não foram preenchidos corretamente!");
+                }
             }
         }
     }
 
-    function createBody() {
-        const produtoId = id === "" ? null : id;
-        return {
-            "id": produtoId,
-            "titulo": titulo,
-            "estoque": estoque,
-            "descricao": descricao,
-            "preco": preco,
-            "preco_atv": precoAtv,
-            "bonus": bonus,
-            "bonus_atv": bonusAtv,
-            "categoria": categoria,
-            "tipo": tipo,
-            "status": status,
-            "thumb": thumb,
-            "peso": peso
-        }
-    }
-
-    function clearForm() {
-        setId("");
-        setTitulo("");
-        setEstoque("");
-        setDescricao("");
-        setPreco("");
-        setPrecoAtv("");
-        setBonus("");
-        setBonusAtv("");
-        setCategoria("");
-        setTipo("");
-        setPeso("");
-        setThumb("");
-        setStatus("RASCUNHO");
-        setBotaoLabel("Cadastrar");
-        setReadOnly(false);
-        clearErrors();
-    }
-
-    function clearErrors() {
-        setTituloHasError(false);
-        setEstoqueHasError(false);
-        setDescricaoHasError(false);
-        setPrecoHasError(false);
-        setPrecoAtvHasError(false);
-        setBonusHasError(false);
-        setBonusAtvHasError(false);
-        setCategoriaHasError(false);
-        setTipoHasError(false);
-        setPesoHasError(false);
-        setThumbHasError(false);
-    }
 
     function setSubmitClass() {
         switch (botaoLabel) {

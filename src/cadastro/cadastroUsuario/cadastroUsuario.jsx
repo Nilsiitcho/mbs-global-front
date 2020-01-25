@@ -8,10 +8,9 @@ import LabelInput from "../../common/template/labelInput";
 import Pages from "../../common/template/paginacao";
 import Loading from "../../common/template/loading";
 
-import fieldsValidator from "../../utils/fieldValidator";
-
-import {toast} from "react-toastify";
 import axios from "axios";
+import {toast} from "react-toastify";
+import fieldsValidator from "../../utils/fieldValidator";
 
 export default () => {
     const BASE_URL = "http://localhost:3001/usuario";
@@ -19,6 +18,11 @@ export default () => {
     const [usuarios, setUsuarios] = useState([]);
 
     const [id, setId] = useState("");
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+
+    const [nomeHasError, setNomeHasError] = useState(false);
+    const [emailHasError, setEmailHasError] = useState(false);
 
     const [totalPaginas, setTotalPaginas] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
@@ -31,11 +35,65 @@ export default () => {
         getData();
     }, []);
 
-    function handleChange(e){
+    function handleChange(e) {
         const setters = {
-            "id": () => setId(e.target.value)
+            "id": () => setId(e.target.value),
+            "nome": () => {
+                setNome(e.target.value);
+                setNomeHasError(false);
+            },
+            "email": () => {
+                setEmail(e.target.value);
+                setEmailHasError(false);
+            }
         };
-      setters[e.target.name]();
+        setters[e.target.name]();
+    }
+
+    async function fillForm(id) {
+        const {data} = await axios.get(`${BASE_URL}/${id}`);
+        const usuario = data[0];
+
+        setId(usuario.id);
+        setNome(usuario.nome);
+        setEmail(usuario.email);
+    }
+
+    function clearForm() {
+        setId("");
+
+        setNome("");
+        setNome("");
+        setNomeHasError(false);
+
+        setEmail("");
+        setEmailHasError(false);
+
+        setReadOnly(false);
+    }
+
+    function createBody() {
+        const usuarioId = id === "" ? null : id;
+        return {
+            "id": usuarioId,
+            "nome": nome,
+            "email": email
+        }
+    }
+
+    function validateFields() {
+        function createValidator(field, type, callBack) {
+            return {
+                field: field,
+                type: type,
+                callBack: callBack
+            }
+        }
+
+        const fields = [];
+        fields.push(createValidator(nome, "text", () => setNomeHasError(true)));
+        fields.push(createValidator(email, "text", () => setEmailHasError(true)));
+        return fieldsValidator.validate(fields);
     }
 
     async function getData(page = 1) {
@@ -79,22 +137,65 @@ export default () => {
         setReadOnly(true);
     }
 
-    async function fillForm(id){
-        const {data} = await axios.get(`${BASE_URL}/${id}`);
-        const usuario = data[0];
-
-        setId(usuario.id);
-    }
-
-    function createBody(){
-        const usuarioId = id === "" ? null : id;
-        return {
-            "id": usuarioId
+    function setSubmitClass() {
+        switch (botaoLabel) {
+            case "Cadastrar":
+                return "btn-success";
+            case "Apagar":
+                return "btn-danger";
+            default :
+                return "btn-info";
         }
     }
 
-    function clearForm(){
-        setId("");
+    function handleSubmit() {
+        switch (botaoLabel) {
+            case "Cadastrar":
+                doRequest("post");
+                return;
+            case "Apagar":
+                doRequest("delete");
+                return;
+            default:
+                doRequest("put");
+                return;
+        }
+
+        function doRequest(method) {
+            function doDelete() {
+                axios.delete(`${BASE_URL}/${id}`)
+                    .then(async () => {
+                        toast.success("Registro excluído com sucesso");
+                        await getData();
+                        clearForm();
+                    }).catch(err => {
+                    toast.error("Falha ao excluir Registro!");
+                });
+            }
+
+            function doPostPut() {
+                const registroId = id != null ? id : '';
+                const body = createBody();
+                axios[method](`${BASE_URL}/${registroId}`, body)
+                    .then(async () => {
+                        toast.success("Registro salvo com sucesso");
+                        await getData();
+                        clearForm();
+                    }).catch(err => {
+                    toast.error("Falha ao salvar registro!");
+                });
+            }
+
+            if (method === "delete") {
+                doDelete();
+            } else {
+                if (validateFields()) {
+                    doPostPut();
+                } else {
+                    toast.error("Alguns campos não foram preenchidos corretamente!");
+                }
+            }
+        }
     }
 
     function renderData() {
@@ -121,7 +222,19 @@ export default () => {
             <Content>
                 <Row>
                     <Grid cols="12 3">
-                        <h1>form1</h1>
+                        <div className="form-group">
+                            <LabelInput name="id" label="ID"
+                                        placeholder="" type="text"
+                                        value={id} onChange={handleChange} readOnly/>
+
+                            <LabelInput name="nome" label="Nome" readOnly={readOnly}
+                                        placeholder="Informe o Nome" type="text" hasError={nomeHasError}
+                                        value={nome} onChange={handleChange}/>
+
+                            <LabelInput name="email" label="Email" readOnly={readOnly}
+                                        placeholder="Informe o Email" type="text" hasError={emailHasError}
+                                        value={email} onChange={handleChange}/>
+                        </div>
                     </Grid>
 
                     <Grid cols="12 3">
@@ -136,7 +249,14 @@ export default () => {
                         <h1>form4</h1>
                     </Grid>
                 </Row>
-
+                <Row>
+                    <div className="box-footer">
+                        <button style={{width: "90px"}} className={`btn ${setSubmitClass()}`}
+                                onClick={handleSubmit}>{botaoLabel}</button>
+                        <button className="btn btn-default margin-left" onClick={clearForm}>Cancelar</button>
+                    </div>
+                </Row>
+                <hr/>
                 <Row>
                     <Grid cols="12">
                         {renderData()}
