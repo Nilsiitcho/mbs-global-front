@@ -17,12 +17,36 @@ export default () => {
 
     const [usuarios, setUsuarios] = useState([]);
 
+    //Coluna 1
     const [id, setId] = useState("");
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
+    const [login, setLogin] = useState("");
+    const [foto, setFoto] = useState("");
+    const [senha, setSenha] = useState("");
+    const [status, setStatus] = useState("Inativo");
 
+    //Coluna 2
+    const [cpf, setCpf] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [celular, setCelular] = useState("");
+    const [dataNascimento, setDataNascimento] = useState("");
+    const [endereco, setendereco] = useState("");
+    const [complemento, setComplemento] = useState("");
+
+    //Coluna 1
     const [nomeHasError, setNomeHasError] = useState(false);
     const [emailHasError, setEmailHasError] = useState(false);
+    const [loginHasError, setLoginHasError] = useState(false);
+    const [fotoHasError, setFotoHasError] = useState(false);
+    const [senhaHasError, setSenhaHasError] = useState(false);
+
+    //Coluna 2
+    const [cpfHasError, setCpfHasError] = useState(false);
+    const [telefoneHasError, setTelefoneHasError] = useState(false);
+    const [celularHasError, setCelularHasError] = useState(false);
+    const [dataNascimentoHasError, setDataNascimentoHasError] = useState(false);
+    const [enderecoHasError, setEnderecoHasError] = useState(false);
 
     const [totalPaginas, setTotalPaginas] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
@@ -45,7 +69,41 @@ export default () => {
             "email": () => {
                 setEmail(e.target.value);
                 setEmailHasError(false);
-            }
+            },
+            "login": () => {
+                setLogin(e.target.value);
+                setLoginHasError(false);
+            },
+            "foto": () => {
+                setFoto(e.target.value);
+                setFotoHasError(false);
+            },
+            "senha": () => {
+                setSenha(e.target.value);
+                setSenhaHasError(false);
+            },
+            "status": () => setStatus(e.target.value),
+            "cpf": () => {
+                setCpf(e.target.value);
+                setCpfHasError(false);
+            },
+            "telefone": () => {
+                setTelefone(e.target.value);
+                setTelefoneHasError(false);
+            },
+            "celular": () => {
+                setCelular(e.target.value);
+                setCelularHasError(false);
+            },
+            "dataNascimento": () => {
+                setDataNascimento(e.target.value);
+                setDataNascimentoHasError(false);
+            },
+            "endereco": () => {
+                setendereco(e.target.value);
+                setEnderecoHasError(false);
+            },
+            "complemento": () => setComplemento(e.target.value)
         };
         setters[e.target.name]();
     }
@@ -57,6 +115,17 @@ export default () => {
         setId(usuario.id);
         setNome(usuario.nome);
         setEmail(usuario.email);
+        setLogin(usuario.login);
+        setSenha(usuario.senha);
+        setStatus(usuario.status);
+        setFoto(usuario.foto);
+
+        setCpf(usuario.cpf);
+        setTelefone(usuario.cpf);
+        setCelular(usuario.celular);
+        setDataNascimento(usuario.data_nascimento);
+        setendereco(usuario.endereco);
+        setComplemento(usuario.complemento);
     }
 
     function clearForm() {
@@ -69,6 +138,34 @@ export default () => {
         setEmail("");
         setEmailHasError(false);
 
+        setLogin("");
+        setLoginHasError(false);
+
+        setSenha("");
+        setSenhaHasError(false);
+
+        setFoto("");
+        setFotoHasError(false);
+
+        setStatus("Inativo");
+
+        setCpf("");
+        setCpfHasError(false);
+
+        setTelefone("");
+        setTelefoneHasError(false);
+
+        setCelular("");
+        setCelularHasError(false);
+
+        setDataNascimento("");
+        setDataNascimentoHasError(false);
+
+        setendereco("");
+        setEnderecoHasError(false);
+
+        setComplemento("");
+
         setReadOnly(false);
     }
 
@@ -77,7 +174,17 @@ export default () => {
         return {
             "id": usuarioId,
             "nome": nome,
-            "email": email
+            "email": email,
+            "login": login,
+            "senha": senha,
+            "foto": foto,
+            "status": status,
+            "cpf": cpf,
+            "telefone": telefone,
+            "celular": celular,
+            "data_nascimento": dataNascimento,
+            "endereco": endereco,
+            "complemento": complemento
         }
     }
 
@@ -92,7 +199,15 @@ export default () => {
 
         const fields = [];
         fields.push(createValidator(nome, "text", () => setNomeHasError(true)));
-        fields.push(createValidator(email, "text", () => setEmailHasError(true)));
+        fields.push(createValidator(email, "email", () => setEmailHasError(true)));
+        fields.push(createValidator(login, "text", () => setLoginHasError(true)));
+        fields.push(createValidator(senha, "senha", () => setSenhaHasError(true)));
+        fields.push(createValidator(foto, "text", () => setFotoHasError(true)));
+        fields.push(createValidator(cpf, "cpf", () => setCpfHasError(true)));
+        fields.push(createValidator(telefone, "telefone", () => setTelefoneHasError(true)));
+        fields.push(createValidator(celular, "telefone", () => setCelularHasError(true)));
+        fields.push(createValidator(dataNascimento, "date", () => setDataNascimentoHasError(true)));
+        fields.push(createValidator(endereco, "text", () => setEnderecoHasError(true)));
         return fieldsValidator.validate(fields);
     }
 
@@ -232,13 +347,56 @@ export default () => {
                                         value={nome} onChange={handleChange}/>
 
                             <LabelInput name="email" label="Email" readOnly={readOnly}
-                                        placeholder="Informe o Email" type="text" hasError={emailHasError}
+                                        placeholder="Informe o Email" type="email" hasError={emailHasError}
                                         value={email} onChange={handleChange}/>
+
+                            <LabelInput name="login" label="Login" readOnly={readOnly}
+                                        placeholder="Informe o Login" type="text" hasError={loginHasError}
+                                        value={login} onChange={handleChange}/>
+
+                            <LabelInput name="foto" label="Foto" readOnly={readOnly}
+                                        placeholder="Informe o Foto" type="text" hasError={fotoHasError}
+                                        value={foto} onChange={handleChange}/>
+
+                            <LabelInput name="senha" label="Senha" readOnly={readOnly}
+                                        placeholder="Informe a Senha" type="password" hasError={senhaHasError}
+                                        value={senha} onChange={handleChange}/>
+
+                            <label htmlFor="status">Status</label>
+                            <select name="status" className="form-control" disabled={readOnly} readOnly={readOnly}
+                                    onChange={handleChange}>
+                                <option value="Inativo">Inativo</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Pre">Pre</option>
+                            </select>
                         </div>
                     </Grid>
 
                     <Grid cols="12 3">
-                        <h1>form2</h1>
+                        <LabelInput name="cpf" label="CPF" readOnly={readOnly}
+                                    placeholder="Informe o CPF" type="text" hasError={cpfHasError}
+                                    value={cpf} onChange={handleChange}/>
+
+                        <LabelInput name="telefone" label="Telefone" readOnly={readOnly}
+                                    placeholder="Informe o Telefone" type="text" hasError={telefoneHasError}
+                                    value={telefone} onChange={handleChange}/>
+
+                        <LabelInput name="celular" label="Celular" readOnly={readOnly}
+                                    placeholder="Informe o Celular" type="text" hasError={celularHasError}
+                                    value={celular} onChange={handleChange}/>
+
+                        <LabelInput name="dataNascimento" label="Data Nascimento" readOnly={readOnly}
+                                    placeholder="Informe a Data de Nascimento" type="date"
+                                    hasError={dataNascimentoHasError}
+                                    value={dataNascimento} onChange={handleChange}/>
+
+                        <LabelInput name="endereco" label="Endereço" readOnly={readOnly}
+                                    placeholder="Informe o Endereço" type="text" hasError={enderecoHasError}
+                                    value={endereco} onChange={handleChange}/>
+
+                        <LabelInput name="complemento" label="Complemento" readOnly={readOnly}
+                                    placeholder="Informe o Complemento" type="text"
+                                    value={complemento} onChange={handleChange}/>
                     </Grid>
 
                     <Grid cols="12 3">

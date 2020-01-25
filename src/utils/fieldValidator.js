@@ -6,6 +6,11 @@ function validate(dataArray = []) {
                 data.callBack();
                 isValid = false;
             }
+        } else if (data.type === "email") {
+            if (!data.field.includes("@")) {
+                data.callBack();
+                isValid = false;
+            }
         } else {
             if (data.field == null || data.field === "") {
                 data.callBack();
