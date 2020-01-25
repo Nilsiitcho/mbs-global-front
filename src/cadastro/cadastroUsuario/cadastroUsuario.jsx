@@ -33,6 +33,21 @@ export default () => {
     const [dataNascimento, setDataNascimento] = useState("");
     const [endereco, setendereco] = useState("");
     const [complemento, setComplemento] = useState("");
+    const [distribuicao, setDistribuicao] = useState("");
+
+    //Coluna 3
+    const [saque, setSaque] = useState("");
+    const [saldoBloqueado, setSaldoBloqueado] = useState("");
+    const [saqueBloqueado, setSaqueBloqueado] = useState("");
+    const [qualificacao, setQualificacao] = useState("");
+    const [dataCadastro, setDataCadastro] = useState("");
+    const [dataAtivacao, setDataAtivacao] = useState("");
+    const [vencimento, setVencimento] = useState("");
+
+    //Coluna 4
+    const [nivel, setNivel] = useState("");
+    const [secundaria, setSecundaria] = useState("");
+    const [code, setCode] = useState("");
 
     //Coluna 1
     const [nomeHasError, setNomeHasError] = useState(false);
@@ -47,6 +62,17 @@ export default () => {
     const [celularHasError, setCelularHasError] = useState(false);
     const [dataNascimentoHasError, setDataNascimentoHasError] = useState(false);
     const [enderecoHasError, setEnderecoHasError] = useState(false);
+
+    //Coluna 3
+    const [qualificacaoHasError, setQualificacaoHasError] = useState(false);
+    const [dataCadastroHasError, setDataCadastroHasError] = useState(false);
+    const [dataAtivacaoHasError, setDataAtivacaoHasError] = useState(false);
+    const [vencimentoHasError, setVencimentoHasError] = useState(false);
+
+    //Coluna 4
+    const [nivelHasError, setNivelHasError] = useState(false);
+    const [secundariaHasError, setSecundariaHasError] = useState(false);
+    const [codeHasError, setCodeHasError] = useState(false);
 
     const [totalPaginas, setTotalPaginas] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
@@ -103,7 +129,39 @@ export default () => {
                 setendereco(e.target.value);
                 setEnderecoHasError(false);
             },
-            "complemento": () => setComplemento(e.target.value)
+            "complemento": () => setComplemento(e.target.value),
+            "distribuicao": () => setDistribuicao(e.target.value),
+            "saque": () => setSaque(e.target.value),
+            "saldoBloqueado": () => setSaldoBloqueado(e.target.value),
+            "saqueBloqueado": () => setSaqueBloqueado(e.target.value),
+            "qualificacao": () => {
+                setQualificacao(e.target.value);
+                setQualificacaoHasError(false);
+            },
+            "dataCadastro": () => {
+                setDataCadastro(e.target.value);
+                setDataCadastroHasError(false);
+            },
+            "dataAtivacao": () => {
+                setDataAtivacao(e.target.value);
+                setDataAtivacaoHasError(false);
+            },
+            "vencimento": () => {
+                setVencimento(e.target.value);
+                setVencimentoHasError(false);
+            },
+            "nivel": () => {
+                setNivel(e.target.value);
+                setNivelHasError(false);
+            },
+            "secundaria": () => {
+                setSecundaria(e.target.error);
+                setSecundariaHasError(false);
+            },
+            "code": () => {
+                setCode(e.target.value);
+                setCodeHasError(false);
+            }
         };
         setters[e.target.name]();
     }
@@ -126,6 +184,19 @@ export default () => {
         setDataNascimento(usuario.data_nascimento);
         setendereco(usuario.endereco);
         setComplemento(usuario.complemento);
+        setDistribuicao(usuario.distribuicao);
+
+        setSaque(usuario.saque);
+        setSaldoBloqueado(usuario.saldoBloqueado);
+        setSaqueBloqueado(usuario.saquebloqueado);
+        setQualificacao(usuario.qualificacao);
+        setDataCadastro(usuario.data_cadastro);
+        setDataAtivacao(usuario.data_ativacao);
+        setVencimento(usuario.vencimento);
+
+        setNivel(usuario.nivel);
+        setSecundaria(usuario.secundaria);
+        setCode(usuario.code);
     }
 
     function clearForm() {
@@ -165,7 +236,33 @@ export default () => {
         setEnderecoHasError(false);
 
         setComplemento("");
+        setDistribuicao("");
+        setSaque("");
+        setSaldoBloqueado("");
+        setSaqueBloqueado("");
 
+        setQualificacao("");
+        setQualificacaoHasError(false);
+
+        setDataCadastro("");
+        setDataCadastroHasError(false);
+
+        setDataAtivacao("");
+        setDataAtivacaoHasError(false);
+
+        setVencimento("");
+        setVencimentoHasError(false);
+
+        setNivel("");
+        setNivelHasError(false);
+
+        setSecundaria("");
+        setSecundariaHasError(false);
+
+        setCode("");
+        setCodeHasError(false);
+
+        setBotaoLabel("Cadastrar");
         setReadOnly(false);
     }
 
@@ -184,7 +281,18 @@ export default () => {
             "celular": celular,
             "data_nascimento": dataNascimento,
             "endereco": endereco,
-            "complemento": complemento
+            "complemento": complemento,
+            "distribuicao": distribuicao,
+            "saque": saque,
+            "saldoBloqueado": saldoBloqueado,
+            "saquebloqueado": saqueBloqueado,
+            "qualificacao": qualificacao,
+            "data_cadastro": dataCadastro,
+            "data_ativacao": dataAtivacao,
+            "vencimento": vencimento,
+            "nivel": nivel,
+            "secundaria": secundaria,
+            "code": code
         }
     }
 
@@ -208,6 +316,13 @@ export default () => {
         fields.push(createValidator(celular, "telefone", () => setCelularHasError(true)));
         fields.push(createValidator(dataNascimento, "date", () => setDataNascimentoHasError(true)));
         fields.push(createValidator(endereco, "text", () => setEnderecoHasError(true)));
+        fields.push(createValidator(qualificacao, "text", () => setQualificacaoHasError(true)));
+        fields.push(createValidator(dataCadastro, "date", () => setDataCadastroHasError(true)));
+        fields.push(createValidator(dataAtivacao, "date", () => setDataAtivacaoHasError(true)));
+        fields.push(createValidator(vencimento, "date", () => setVencimentoHasError(true)));
+        fields.push(createValidator(nivel, "text", () => setNivelHasError(true)));
+        fields.push(createValidator(secundaria, "text", () => setSecundariaHasError(true)));
+        fields.push(createValidator(code, "text", () => setCodeHasError(true)));
         return fieldsValidator.validate(fields);
     }
 
@@ -397,14 +512,59 @@ export default () => {
                         <LabelInput name="complemento" label="Complemento" readOnly={readOnly}
                                     placeholder="Informe o Complemento" type="text"
                                     value={complemento} onChange={handleChange}/>
+
+                        <LabelInput name="distribuicao" label="Distribuição" readOnly={readOnly}
+                                    placeholder="Informe a Distribuição" type="text"
+                                    value={distribuicao} onChange={handleChange}/>
                     </Grid>
 
                     <Grid cols="12 3">
-                        <h1>form3</h1>
+                        <LabelInput name="saque" label="Saque" readOnly={readOnly}
+                                    placeholder="Informe o valor do Saque" type="text"
+                                    value={saque} onChange={handleChange}/>
+
+                        <LabelInput name="saldoBloqueado" label="Saldo Bloqueado" readOnly={readOnly}
+                                    placeholder="Informe o valor do Saldo Bloqueado" type="text"
+                                    value={saldoBloqueado} onChange={handleChange}/>
+
+                        <LabelInput name="saqueBloqueado" label="Saque Bloqueado" readOnly={readOnly}
+                                    placeholder="Informe o valor do Saque Bloqueado" type="text"
+                                    value={saqueBloqueado} onChange={handleChange}/>
+
+                        <LabelInput name="qualificacao" label="Qualificação" readOnly={readOnly}
+                                    placeholder="Informe a Qualificação" type="text" hasError={qualificacaoHasError}
+                                    value={qualificacao} onChange={handleChange}/>
+
+                        <LabelInput name="dataCadastro" label="Data de Cadastro" readOnly={readOnly}
+                                    placeholder="Informe a Data de Cadastro" type="date"
+                                    hasError={dataCadastroHasError}
+                                    value={dataCadastro} onChange={handleChange}/>
+
+                        <LabelInput name="dataAtivacao" label="Data de Ativação" readOnly={readOnly}
+                                    placeholder="Informe a Data de Ativação" type="date"
+                                    hasError={dataAtivacaoHasError}
+                                    value={dataAtivacao} onChange={handleChange}/>
+
+                        <LabelInput name="vencimento" label="Data de Vencimento" readOnly={readOnly}
+                                    placeholder="Informe a Data de Vencimento" type="date"
+                                    hasError={vencimentoHasError}
+                                    value={vencimento} onChange={handleChange}/>
                     </Grid>
 
                     <Grid cols="12 3">
-                        <h1>form4</h1>
+                        <LabelInput name="nivel" label="Nível" readOnly={readOnly}
+                                    placeholder="Informe o Nível" type="text" hasError={nivelHasError}
+                                    value={nivel} onChange={handleChange}/>
+
+                        <LabelInput name="secundaria" label="Secundaria" readOnly={readOnly}
+                                    placeholder="Informe o valor da Secundária" type="text"
+                                    hasError={secundariaHasError}
+                                    value={secundaria} onChange={handleChange}/>
+
+                        <LabelInput name="code" label="Código" readOnly={readOnly}
+                                    placeholder="Informe o valor do Código" type="text"
+                                    hasError={codeHasError}
+                                    value={code} onChange={handleChange}/>
                     </Grid>
                 </Row>
                 <Row>
